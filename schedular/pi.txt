@@ -1,0 +1,14 @@
+crontab -e
+
+* * * * * python3 /home/pi/Desktop/if_you_hate_your_tenant/wifi_block.py true >> /home/pi/Desktop/if_you_hate_your_tenant/script.log 2>&1
+
+Each asterisk (*) corresponds to a time unit:
+- The first * is for minutes (0-59)
+- The second * is for hours (0-23)
+- The third * is for the day of the month (1-31)
+- The fourth * is for the month (1-12)
+- The fifth * is for the day of the week (0-7, where both 0 and 7 represent Sunday)
+
+Example, if you want it to run every day at 7:30 AM, you would add the following line to the crontab:
+
+30 7 * * * python3 /home/pi/Desktop/if_you_hate_your_tenant/wifi_block.py true >> /home/pi/Desktop/if_you_hate_your_tenant/script.log 2>&1
