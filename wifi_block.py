@@ -8,6 +8,7 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 import sys
+from time import sleep
 from properties import (NETGEAR_AUTH_URL,
                         BLOCK_IP_ADDRESSES)
 
@@ -33,6 +34,7 @@ def block(block_state=True):
         WebDriverWait(driver, 10).until(EC.alert_is_present())
         alert = driver.switch_to.alert
         alert.accept()
+        sleep(10)
 
     except TimeoutException:
         print(f"No devices selected")
@@ -41,7 +43,7 @@ if __name__ == "__main__":
     block_state = parse_arg(sys.argv[1])
 
     options = Options()
-    options.add_experimental_option("detach", True)
+    options.add_experimental_option("detach", False)
 
     # Open portal using driver
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
@@ -62,4 +64,3 @@ if __name__ == "__main__":
             print(f"Could not find the checkbox for IP or may not exist.")
 
     block(block_state=block_state)
-    
